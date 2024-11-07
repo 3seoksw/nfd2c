@@ -36,10 +36,18 @@ pub struct Args {
     pub directory: Option<String>,
 
     #[arg(
+        short = 'r',
+        long = "recursive",
+        default_value_t = false,
+        help = "Recursively process files in subdirectories",
+    )]
+    pub recursive: bool,
+
+    #[arg(
         short = 'v',
         long = "verbose",
         action = clap::ArgAction::SetTrue,
-        default_value_t = true,
+        default_value_t = false,
         help = "Show more detailed output",
     )]
     pub verbose: bool,
