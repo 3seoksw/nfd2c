@@ -5,13 +5,36 @@ The following program resolves the incompatibility issue of file name written wi
 
 ## Installation (설치)
 
-Download the latest release from [GitHub Releases](https://github.com/3seoksw/nfd2c) and follow the instructions below:
+### Prerequisites
+
+- Make sure you have [Rust](https://www.rust-lang.org/tools/install) installed. You can install it by running:
 
 ```zsh
-
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-## Run (실행)
+Run the following to see whether the prerequisites are installed properly:
+
+```zsh
+cargo --version
+```
+
+### Building
+
+```zsh
+git clone git@github.com:3seoksw/nfd2c.git
+```
+
+Download the latest release by running the above command or from [GitHub Releases](https://github.com/3seoksw/nfd2c/releases).
+
+Navigate into the project directory by `cd` command and build the project with `cargo`.
+
+```zsh
+cargo build --release
+sudo cp ./target/release/nfd2c /usr/local/bin
+```
+
+## Run
 
 ```zsh
 nfd2c -d path/to/files/for/directory
