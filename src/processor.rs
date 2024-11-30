@@ -4,9 +4,8 @@ use unicode_normalization::UnicodeNormalization;
 use walkdir::WalkDir;
 
 pub fn process_file(file_path: &Path, verbose: bool) {
-    // let path = Path::new(&file_path);
     let path = file_path;
-    if !path.is_file() {
+    if !file_path.is_file() {
         eprintln!("No such file found: {:?}", file_path);
         return;
     }
@@ -58,9 +57,7 @@ pub fn process_directory(dir: &str, recursive: bool, verbose: bool) {
                             continue;
                         }
 
-                        let file_name = entry.file_name();
-                        let path = Path::new(&file_name);
-                        process_file(&path, verbose);
+                        process_file(&file_path, verbose);
                     }
                 }
             }
