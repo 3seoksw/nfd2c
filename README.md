@@ -38,5 +38,5 @@ sudo cp ./target/release/nfd2c /usr/local/bin
 ## Run
 
 ```zsh
-nfd2c -d path/to/files/for/directory
+nfd2c path/to/files/for/directory
 ```
