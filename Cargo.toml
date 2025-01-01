@@ -1,6 +1,6 @@
 [package]
 name = "nfd2c"
-version = "0.3.0"
+version = "0.3.2"
 edition = "2021"
 description = "Converts NFD-formatted file names to NFC format"
 license = "MIT"
