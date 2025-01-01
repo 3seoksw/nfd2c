@@ -3,10 +3,10 @@ use std::path::Path;
 use unicode_normalization::UnicodeNormalization;
 use walkdir::WalkDir;
 
-pub fn process_file(file_path: &Path, verbose: bool) {
-    let path = file_path;
-    if !file_path.is_file() {
-        eprintln!("No such file found: {:?}", file_path);
+pub fn normalize_name(path: &Path, verbose: bool, is_file: bool) {
+    if (is_file && !path.is_file()) || (!is_file && !path.is_dir()) {
+        let type_str = if is_file { "file" } else { "directory" };
+        eprintln!("No such {} found: {:?}", type_str, path);
         return;
     }
 
@@ -25,7 +25,7 @@ pub fn process_file(file_path: &Path, verbose: bool) {
                 println!("[x] {:?}", new_path);
             }
         } else if verbose {
-            println!("[ ] {:?}\n └─ NFC format already satisfied", file_path)
+            println!("[ ] {:?}\n └─ NFC format already satisfied", path)
         }
     }
 }
@@ -37,7 +37,10 @@ pub fn process_directory(dir: &str, recursive: bool, verbose: bool) {
                 Ok(entry) => {
                     let file_path = entry.path();
                     if file_path.is_file() {
-                        process_file(&file_path, verbose);
+                        normalize_name(&file_path, verbose, true);
+                        // process_file(&file_path, verbose);
+                    } else if file_path.is_dir() {
+                        normalize_name(&file_path, verbose, false);
                     } else if verbose {
                         println!("Entering non-file entry: {:?}", file_path);
                     }
@@ -54,10 +57,12 @@ pub fn process_directory(dir: &str, recursive: bool, verbose: bool) {
                     if let Ok(entry) = entry {
                         let file_path= entry.path();
                         if !file_path.is_file() {
+                            normalize_name(&file_path, verbose, false);
                             continue;
                         }
 
-                        process_file(&file_path, verbose);
+                        normalize_name(&file_path, verbose, true);
+                        // process_file(&file_path, verbose);
                     }
                 }
             }
