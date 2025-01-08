@@ -3,7 +3,7 @@ use clap::{Parser, ArgGroup};
 #[derive(Parser)]
 #[command(
     name = "nfd2c",
-    version = "0.3.2",
+    version = "0.3.3",
     author = "WooSeok Kim, 3suksw@gmail.com",
     about = "Converts NFD-formatted file names to NFC format"
 )]
