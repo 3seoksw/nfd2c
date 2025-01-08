@@ -10,6 +10,10 @@ pub fn normalize_name(path: &Path, verbose: bool, is_file: bool) {
         return;
     }
 
+    if path.to_string_lossy() == "./" || path.to_string_lossy() == "." {
+        return;
+    }
+
     if let Some(parent) = path.parent() {
         let file_name_str = path.file_name().unwrap();
         let file_name = file_name_str.to_string_lossy();
